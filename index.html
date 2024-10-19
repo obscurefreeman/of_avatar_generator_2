@@ -81,7 +81,7 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
-        @keyframes fadeIn {
+        /* @keyframes fadeIn {
             from {opacity: 0;}
             to {opacity: 1;}
         }
@@ -99,7 +99,7 @@
         @keyframes zoomOut {
             from {transform: scale(1);}
             to {transform: scale(0);}
-        }
+        } */
 
         .modal {
             display: none; /* Hidden by default */
@@ -122,8 +122,11 @@
             width: 60%; /* Could be more or less, depending on screen size */
             max-width: 400px;
             position: absolute;
-            animation-name: zoomIn; /* Apply zoom-in animation */
-            animation-duration: 0.5s; /* Animation duration */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%); /* Center the modal */
+            /* animation-name: zoomIn;
+            animation-duration: 0.5s; */
         }
 
         .modal-content img {
@@ -133,20 +136,20 @@
             border-radius: 20px;
         }
 
-        .modal-content.fadeOut {
-            animation-name: zoomOut; /* Apply zoom-out animation */
-            animation-duration: 0.5s; /* Animation duration */
+        /* .modal-content.fadeOut {
+            animation-name: zoomOut;
+            animation-duration: 0.5s;
         }
 
         .modal-content.fadeIn {
-            animation-name: fadeIn; /* Apply fade-in animation */
-            animation-duration: 0.5s; /* Animation duration */
+            animation-name: fadeIn;
+            animation-duration: 0.5s;
         }
 
         .modal-content.fadeOut {
-            animation-name: fadeOut; /* Apply fade-out animation */
-            animation-duration: 0.5s; /* Animation duration */
-        }
+            animation-name: fadeOut;
+            animation-duration: 0.5s;
+        } */
 
         .close {
             color: #aaa;
@@ -271,21 +274,21 @@
             }
         });
 
-        // 打开弹窗
-        function openModal() {
-            document.getElementById("myModal").style.display = "block";
-            document.querySelector(".modal-content").classList.add("fadeIn");
-        }
+        // // 打开弹窗
+        // function openModal() {
+        //     document.getElementById("myModal").style.display = "block";
+        //     document.querySelector(".modal-content").classList.add("fadeIn");
+        // }
 
-        // 关闭弹窗
-        function closeModal() {
-            document.querySelector(".modal-content").classList.remove("fadeIn");
-            document.querySelector(".modal-content").classList.add("fadeOut");
-            setTimeout(function() {
-                document.getElementById("myModal").style.display = "none";
-                document.querySelector(".modal-content").classList.remove("fadeOut");
-            }, 500); // 等待动画完成
-        }
+        // // 关闭弹窗
+        // function closeModal() {
+        //     document.querySelector(".modal-content").classList.remove("fadeIn");
+        //     document.querySelector(".modal-content").classList.add("fadeOut");
+        //     setTimeout(function() {
+        //         document.getElementById("myModal").style.display = "none";
+        //         document.querySelector(".modal-content").classList.remove("fadeOut");
+        //     }, 500); // 等待动画完成
+        // }
 
     </script>
 </body>
