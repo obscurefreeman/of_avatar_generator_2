@@ -134,20 +134,20 @@
 
         function exportAvatar() {
             const canvas = document.createElement("canvas");
-            canvas.width = 200;
-            canvas.height = 200;
+            canvas.width = 1920;
+            canvas.height = 1920;
 
             const ctx = canvas.getContext("2d");
             ctx.fillStyle = bgColor;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            ctx.font = "42px jammono";
+            ctx.font = "420px jammono";
             ctx.fillStyle = avatar.style.color;
             ctx.textAlign = "center";
             ctx.textBaseline = "middle";
             const lines = ["obscure", "freeman"];
             lines.forEach((line, index) => {
-                ctx.fillText(line, canvas.width / 2, canvas.height / 2 + (index - 0.5) * 36 - 3);
+                ctx.fillText(line, canvas.width / 2, canvas.height / 2 + (index - 0.5) * 360 - 30);
             });
 
             const dataURL = canvas.toDataURL("image/png");
