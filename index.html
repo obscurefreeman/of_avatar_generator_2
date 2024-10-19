@@ -133,6 +133,7 @@
                 return { r, g, b };
             }
 
+            // 导出头像为PNG
             document.getElementById("avatar").addEventListener("click", function() {
                 const canvas = document.createElement("canvas");
                 canvas.width = 1920;
@@ -142,11 +143,13 @@
                 ctx.fillStyle = iroColorPicker.color.hexString;
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+
                 // 最奇怪的一集
                 let bgColor = iroColorPicker.color.hexString;
                 const rgb = hexToRgb(bgColor);
                 const brightness = (rgb.r * 299 + rgb.g * 587 + rgb.b * 114) / 1000;
                 textColor = brightness > 125 ? '#000000' : '#ffffff';
+
 
                 ctx.font = "420px jammono";
                 ctx.fillStyle = textColor;
@@ -158,22 +161,11 @@
                 });
 
                 const dataURL = canvas.toDataURL("image/png");
-                uni.saveImageToPhotosAlbum({
-                    filePath: dataURL,
-                    success() {
-                        uni.showToast({
-                            position: "center",
-                            icon: "none",
-                            title: "图片保存成功，请到手机相册查看"
-                        });
-                    },
-                    fail(e) {
-                        uni.showModal({
-                            content: "保存相册失败，errCode：" + e.errCode + "，errMsg：" + e.errMsg + "，errSubject：" + e.errSubject,
-                            showCancel: false
-                        });
-                    }
-                });
+                const link = document.createElement("a");
+                link.href = dataURL;
+                link.download = "avatar.png";
+                link.click();
+
             });
         });
     </script>
