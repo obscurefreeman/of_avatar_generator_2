@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>头像生成器</title>
     
-    <script src="script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
     
     <style>
@@ -17,7 +16,6 @@
             height: 100vh;
             background-color: #000000;
             color: #fff;
-            /* overflow: hidden;  */
         }
 
         .avatar-generator {
@@ -32,8 +30,6 @@
             background-color: #161616c4;
             position: relative;
             z-index: 1;
-            /* backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px); */
         }
         .avatar {
             width: 200px;
@@ -94,5 +90,29 @@
         <div class="ColorPicker" id="boxPicker"></div>
     </div>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const iroColorPicker = new iro.ColorPicker("#boxPicker", {
+                width: 200,
+                color: "rgb(28, 204, 91)",
+                borderWidth: 0,
+                borderColor: "#000000",
+                layout: [
+                {
+                component: iro.ui.Box },
+            
+                {
+                component: iro.ui.Slider,
+                options: {
+                    id: 'hue-slider',
+                    sliderType: 'hue' } }]
+            });
+
+            // 监听颜色变化事件
+            iroColorPicker.on("color:change", function(color) {
+                document.getElementById("avatar").style.backgroundColor = color.hexString;
+            });
+        });
+    </script>
 </body>
 </html>
