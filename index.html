@@ -83,25 +83,6 @@
             border-radius: 5px;
             cursor: pointer;
         }
-        #exportBtn {
-            font-size: 18px;
-            padding: 10px 20px;
-            background-color: #1ccc5b;
-            color: #ffffff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            margin-top: 10px;
-            transition: transform 0.3s ease;
-        }
-        #exportBtn:hover {
-            background-color: #138d3e;
-            transform: scale(1.1);
-        }
-        #exportBtn:active {
-            transform: scale(0.98);
-        }
         @font-face {
             font-family: 'jammono';
             src: url('assets/fonts/Jam Mono.ttf') format('truetype');
@@ -124,7 +105,6 @@
             <label for="bgColor">背景颜色:</label>
             <input type="color" id="bgColor" value="#1ccc5b">
         </div>
-        <!-- <button id="exportBtn">导出头像</button> -->
     </div>
 
     <script>
@@ -134,13 +114,11 @@
         let bgColor = bgColorPicker.value;
 
         avatar.style.backgroundColor = bgColor;
-        // exportBtn.style.backgroundColor = bgColor;
 
         bgColorPicker.addEventListener('input', function() {
             bgColor = this.value;
             avatar.style.backgroundColor = bgColor;
             updateTextColor();
-            // exportBtn.style.backgroundColor = bgColor;
         });
 
         function updateTextColor() {
@@ -155,11 +133,7 @@
             const b = parseInt(hex.slice(5, 7), 16);
             return { r, g, b };
         }
-
-        // exportBtn.addEventListener("click", function() {
-        //     exportAvatar();
-        // });
-
+        
         avatar.addEventListener("click", function() {
             exportAvatar();
         });
