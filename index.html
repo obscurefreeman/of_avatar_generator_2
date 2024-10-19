@@ -124,19 +124,11 @@
             <label for="bgColor">背景颜色:</label>
             <input type="color" id="bgColor" value="#1ccc5b">
         </div>
-        <div class="export-options">
-            <label for="exportFormat">导出格式:</label>
-            <select id="exportFormat">
-                <option value="image/png">PNG</option>
-                <option value="image/jpeg">JPEG</option>
-            </select>
-        </div>
         <!-- <button id="exportBtn">导出头像</button> -->
     </div>
 
     <script>
         const bgColorPicker = document.querySelector("#bgColor");
-        const exportFormatSelect = document.querySelector("#exportFormat");
         const avatar = document.querySelector("#avatar");
 
         let bgColor = bgColorPicker.value;
@@ -190,10 +182,10 @@
                 ctx.fillText(line, canvas.width / 2, canvas.height / 2 + (index - 0.5) * 36 - 3);
             });
 
-            const dataURL = canvas.toDataURL(exportFormatSelect.value);
+            const dataURL = canvas.toDataURL("image/png");
             const link = document.createElement("a");
             link.href = dataURL;
-            link.download = "avatar." + exportFormatSelect.value.split('/')[1];
+            link.download = "avatar.png";
             link.click();
         }
     </script>
