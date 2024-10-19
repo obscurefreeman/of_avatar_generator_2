@@ -111,6 +111,43 @@
             // 监听颜色变化事件
             iroColorPicker.on("color:change", function(color) {
                 document.getElementById("avatar").style.backgroundColor = color.hexString;
+                updateTextColor(color);
+            });
+
+            // 更新文字颜色
+            function updateTextColor(color) {
+                const r = parseInt(color.rgb.r, 10);
+                const g = parseInt(color.rgb.g, 10);
+                const b = parseInt(color.rgb.b, 10);
+                const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+                document.getElementById("avatar").style.color = brightness > 125 ? '#000000' : '#ffffff';
+            }
+
+            // 导出头像为PNG
+            document.getElementById("avatar").addEventListener("click", function() {
+                const canvas = document.createElement("canvas");
+                canvas.width = 1920;
+                canvas.height = 1920;
+
+                const ctx = canvas.getContext("2d");
+                ctx.fillStyle = document.getElementById("avatar").style.backgroundColor;
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                ctx.font = "420px jammono";
+                ctx.fillStyle = document.getElementById("avatar").style.color;
+                ctx.textAlign = "center";
+                ctx.textBaseline = "middle";
+                const lines = ["obscure", "freeman"];
+                lines.forEach((line, index) => {
+                    ctx.fillText(line, canvas.width / 2, canvas.height / 2 + (index - 0.5) * 360 - 30);
+                });
+
+                const dataURL = canvas.toDataURL("image/png");
+                const link = document.createElement("a");
+                link.href = dataURL;
+                link.download = "avatar.png";
+                link.click();
+
             });
         });
     </script>
