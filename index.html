@@ -80,6 +80,52 @@
             align-items: center;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
+
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+
+        .modal-content {
+            background-color: #272727;
+            padding-inline: 30px;
+            padding-bottom: 30px;
+            border-radius: 20px;
+            width: 50%; /* Could be more or less, depending on screen size */
+            position: absolute;
+            top: 50%; /* Center vertically */
+            left: 50%; /* Center horizontally */
+            transform: translate(-50%, -50%); /* Adjust position to be centered */
+        }
+
+        .modal-content img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 30px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -90,6 +136,13 @@
             obscure<br>freeman
         </div>
         <div class="ColorPicker" id="boxPicker"></div>
+    </div>
+
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <img id="modalImage" src="" alt="Generated Avatar">
+        </div>
     </div>
 
     <script>
@@ -133,8 +186,8 @@
                 return { r, g, b };
             }
 
-            // 导出头像为PNG并保存到相册
-            document.getElementById("avatar").addEventListener("click", async function() {
+            // 导出头像为PNG
+            document.getElementById("avatar").addEventListener("click", function() {
                 const canvas = document.createElement("canvas");
                 canvas.width = 1920;
                 canvas.height = 1920;
@@ -159,24 +212,28 @@
                 });
 
                 const dataURL = canvas.toDataURL("image/png");
-
-                try {
-                    const blob = await (await fetch(dataURL)).blob();
-                    const fileHandle = await window.showSaveFilePicker({
-                        suggestedName: 'avatar.png',
-                        types: [{
-                            description: 'PNG Image',
-                            accept: {'image/png': ['.png']},
-                        }],
-                    });
-                    const writableStream = await fileHandle.createWritable();
-                    await writableStream.write(blob);
-                    await writableStream.close();
-                    alert('图片已保存到相册');
-                } catch (error) {
-                    console.error('保存图片失败:', error);
-                }
+                document.getElementById("modalImage").src = dataURL;
+                const modal = document.getElementById("myModal");
+                modal.style.display = "block";
             });
+
+            // Get the modal
+            const modal = document.getElementById("myModal");
+
+            // Get the <span> element that closes the modal
+            const span = document.getElementsByClassName("close")[0];
+
+            // When the user clicks on <span> (x), close the modal
+            span.onclick = function() {
+                modal.style.display = "none";
+            }
+
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
         });
     </script>
 </body>
