@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>头像生成器</title>
     
-    <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
+    <script src="iro.min.js"></script>
     
     <style>
         body {
@@ -36,8 +36,8 @@
             width: 200px;
             height: 190px;
             border-radius: 10%;
-            background-color: #1ccc5b;
-            color: #000000;
+            background-color: #1c4dcc;
+            color: #ffffff;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -51,10 +51,10 @@
             -webkit-user-select: none;
             cursor: pointer;
         }
-        .avatar:hover {
+        /* .avatar:hover {
             transform: scale(1.1) rotate(1deg);
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-        }
+        } */
         .avatar:active {
             transform: scale(0.95);
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -187,7 +187,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             const iroColorPicker = new iro.ColorPicker("#boxPicker", {
                 width: 200,
-                color: "rgb(28, 204, 91)",
+                color: "rgb(28, 77, 204)",
                 borderWidth: 0,
                 borderColor: "#000000",
                 layout: [
